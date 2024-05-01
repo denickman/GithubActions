@@ -1,0 +1,23 @@
+name: Set Bug Label on New Issue
+
+on:
+  issues:
+    types: [opened]
+
+
+jobs:
+  assign_label:
+    runs-on: macos-latest
+    steps:
+        - name: Assing Label
+          if: contains(github.event.issue.title, 'bug')
+          run: |
+            curl -X POST \
+            --url https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/labels \
+            -H 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
+            -H 'content-type: application/json' \
+            -d '{
+                "labels": ["bug"]
+            }' \
+            --fail
+            

@@ -1,0 +1,52 @@
+name: Test project
+
+# define the events that should be triggered
+
+# Events that triggers workflow you can find here
+# https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#push
+
+# on: workflow_dispatch # trigger workflow manually
+on:
+    # [push, workflow_dispatch]
+#    push:
+#        branches:
+#            - main
+            
+    push:
+        branches:
+            - main
+    
+jobs:
+    test-job:
+        runs-on: macos-13
+      
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+              
+            - name: Install pods
+              run: |
+                sudo gem install cocoapods
+                cd ./github-actions
+                pod install
+            
+            - name: List of runtimes
+              run: xcrun simctl list runtimes
+              
+            - name: List of simulators
+              run: xcrun simctl list devices
+              
+            - name: Setup Simulator
+              run: |
+                    sudo mkdir -p /Library/Developer/CoreSimulator/Profiles/Runtimes
+                    sudo ln -s /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime /Library/Developer/CoreSimulator/Profiles/Runtimes/iOS\ 16.4.simruntime
+                    xcrun simctl list runtimes
+                    xcrun simctl create "iPhone 12" com.apple.CoreSimulator.SimDeviceType.iPhone-12 com.apple.CoreSimulator.SimRuntime.iOS-16-4
+                    xcrun simctl list devices 16.4
+
+            - name: Test XCode project
+              run: |
+                cd ./github-actions
+                ls -R
+                xcodebuild clean test -workspace github-actions.xcworkspace -scheme github-actions -destination 'platform=iOS Simulator,OS=16.4,name=iPhone 12'
+
