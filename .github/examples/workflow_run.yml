@@ -1,0 +1,13 @@
+name: Workflow Depending
+on:
+    workflow_run:
+        workflows: [Repository Events]
+        types: [completed]
+        branches:
+            - main # extra filtering here if workflow 'repository events' runs on main branch
+
+jobs:
+    echo-string:
+        runs-on: macos-latest
+        steps:
+            - run: echo ">>> Triggered because 'Repository Events' was completed >>>"

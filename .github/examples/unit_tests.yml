@@ -1,0 +1,54 @@
+name: Run Unit Tests
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    name: Build and Test default scheme using iPhone
+    runs-on: macos-latest
+
+    env:
+    #   DERIVED_DATA_PATH: ${{ 'github-actions.xcworkspace/DerivedData' }}
+      XC_VERSION: ${{ '13_3' }}
+      XC_WORKSPACE: ${{ 'github-actions.xcworkspace' }}
+      XC_SCHEME: ${{ 'github-actions' }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+
+    steps:
+
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install pod dependencies
+        run: |
+            cd github-actions
+            pod install
+
+      - name: Force Xcode 14.3.1
+        run: sudo xcode-select -switch /Applications/Xcode.app
+
+      - name: Huma SDK Example Unit Tests
+        run: |
+            cd github-actions
+            ls -la
+            xcodebuild test -project github-actions.xcodeproj \
+            -scheme github-actions \
+            -destination 'platform=iOS Simulator,OS=15.0,name=iPhone 12 Pro'
+            -upload-test-results
+
+
+    #   - name: Upload unit test results
+    #     uses: actions/upload-artifact@v1
+    #     with:
+    #         name: TestLogs
+    #         path: "${{env.DERIVED_DATA_PATH}}/Logs/Test"
