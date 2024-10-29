@@ -1,5 +1,9 @@
-name: Issues
-on: issues
+name: Events Demo 1
+on:
+    pull_request:
+    types:
+    - opened
+    workflow_dispatch: #need to add `:` at the end
 
 jobs:
     outputInfo:
