@@ -33,6 +33,7 @@ jobs:
 
       - name: Check if .xcodeproj exists
         run: |
+                cd ..
                 ls -la
                  if [ -f "github-actions/github-actions.xcodeproj" ]; then
                  echo ".xcodeproj exists"
