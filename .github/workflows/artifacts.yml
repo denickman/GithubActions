@@ -29,12 +29,11 @@ jobs:
           pod install --verbose
 
       - name: List AFTER
-        run: |
-          cd github-actions
-          ls -la
+        run: ls -la
 
       - name: Check if .xcodeproj exists
         run: |
+                ls -la
                  if [ -f "github-actions/github-actions.xcodeproj" ]; then
                  echo ".xcodeproj exists"
                  else
@@ -45,6 +44,7 @@ jobs:
 
       - name: Check if .xcworkspace exists
         run: |
+         ls -la
              if [ -f "github-actions/github-actions.xcworkspace" ]; then
                 echo "Workspace exists"
                 else
