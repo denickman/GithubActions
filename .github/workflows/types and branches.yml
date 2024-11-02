@@ -1,37 +1,37 @@
-name: Events Demo 1
-on:
-    pull_request:
-        types:
-            - opened
-     
-        branches: # only pushed on the main branch would be trigger workflow
-            - main
-            - 'dev-*' # all branches started with dev-
-            - 'feat/**' # all branches started with 'feat/', ** any combinations of words or slashes /
-            
-            
-    workflow_dispatch: #need to add `:` at the end
-    
-    push: # this event will be triggered on branches if we did not change anything in that folder or do any changes there
-        branches: # only pushed on the main branch would be trigger workflow
-            - main
-            - 'dev-*' # all branches started with dev-
-            - 'feat/**' # all branches started with 'feat/', ** any combinations of words or slashes /
-        paths-ignore:
-            '.github/workflows/*' # we did not change anything in that folder
-        paths:
-            '.github/workflows/*'
-        
-        
-            
-        
-
-jobs:
-    outputInfo:
-        runs-on: macos-latest
-        
-        steps:
-            - name: Output event details
-              run: echo  
-    
-        
+#name: Events Demo 1
+#on:
+#    pull_request:
+#        types:
+#            - opened
+#     
+#        branches: # only pushed on the main branch would be trigger workflow
+#            - main
+#            - 'dev-*' # all branches started with dev-
+#            - 'feat/**' # all branches started with 'feat/', ** any combinations of words or slashes /
+#            
+#            
+#    workflow_dispatch: #need to add `:` at the end
+#    
+#    push: # this event will be triggered on branches if we did not change anything in that folder or do any changes there
+#        branches: # only pushed on the main branch would be trigger workflow
+#            - main
+#            - 'dev-*' # all branches started with dev-
+#            - 'feat/**' # all branches started with 'feat/', ** any combinations of words or slashes /
+#        paths-ignore:
+#            '.github/workflows/*' # we did not change anything in that folder
+#        paths:
+#            '.github/workflows/*'
+#        
+#        
+#            
+#        
+#
+#jobs:
+#    outputInfo:
+#        runs-on: macos-latest
+#        
+#        steps:
+#            - name: Output event details
+#              run: echo  
+#    
+#        
