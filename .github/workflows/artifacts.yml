@@ -33,6 +33,15 @@ jobs:
           cd github-actions
           pod install
 
+      - name: Check if .xcworkspace exists
+        run: |
+             if [ -f "github-actions/github-actions.xcworkspace" ]; then
+                echo "Workspace exists"
+                else
+                 echo "Workspace not found"
+                exit 1
+             fi
+
       - name: Set up Xcode 14.3.1
         uses: maxim-lobanov/setup-xcode@v1
         with:
@@ -42,7 +51,7 @@ jobs:
         run: |
           cd github-actions
           xcodebuild test \
-            -project github-actions.xcworkspace \
+            -workspace github-actions.xcworkspace \
             -scheme "github-actions" \
             -destination 'platform=iOS Simulator,name=iPhone 14' \
             CODE_SIGN_IDENTITY="" \
