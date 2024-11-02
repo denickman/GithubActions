@@ -27,16 +27,19 @@ jobs:
         id: pbls
         run: find Resources/*.json -type f -execdir echo 'json-file={}' >> $GITHUB_OUTPUT ';'
 
-      # - name: List BEFORE
-      #   run: ls -la
-      #
-      # - name: Install pod dependencies
-      #   run: |
-      #     cd github-actions
-      #     pod install --verbose
-      #
-      # - name: List AFTER
-      #   run: ls -la
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+            path: |
+                Pods
+                Podfile.lock
+                key: ${{ runner.os }}-pod-${{ hashFiles('**/Podfile.lock') }}
+
+
+      - name: Install pod dependencies
+        run: |
+           cd github-actions
+           pod install # --verbose
 
       # - name: Check if .xcodeproj exists
       #   run: |
@@ -47,7 +50,6 @@ jobs:
       #             echo ".xcodeproj not found"
       #            exit 1
       #               fi
-
 
       # - name: Check if .xcworkspace exists
       #   run: |
@@ -95,8 +97,6 @@ jobs:
           uses: actions/download-artifact@v4
           with:
             name: Artifacts
-
-        - name: List downloaded files
           run: ls -la
 
         - name: Output filename
