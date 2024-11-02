@@ -20,18 +20,28 @@ jobs:
       - name: Show current directory
         run: pwd
 
-      - name: List files in root directory
+      - name: List BEFORE
         run: ls -la
-
-      - name: List files in github-actions directory
-        run: |
-          cd github-actions
-          ls -la
 
       - name: Install pod dependencies
         run: |
           cd github-actions
-          pod install
+          pod install --verbose
+
+      - name: List AFTER
+        run: |
+          cd github-actions
+          ls -la
+
+      - name: Check if .xcodeproj exists
+        run: |
+                 if [ -f "github-actions/github-actions.xcodeproj" ]; then
+                 echo ".xcodeproj exists"
+                 else
+                  echo ".xcodeproj not found"
+                 exit 1
+                    fi
+
 
       - name: Check if .xcworkspace exists
         run: |
