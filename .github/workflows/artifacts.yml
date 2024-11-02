@@ -95,6 +95,8 @@ jobs:
           uses: actions/download-artifact@v4
           with:
             name: Artifacts
+
+        - name: List downloaded files
           run: ls -la
 
         - name: Output filename
