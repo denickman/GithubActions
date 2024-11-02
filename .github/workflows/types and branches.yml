@@ -32,6 +32,6 @@ jobs:
         
         steps:
             - name: Output event details
-              run: echo "${{ toJSON(github.event) }}"
+              run: echo  
     
         

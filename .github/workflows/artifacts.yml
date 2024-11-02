@@ -1,0 +1,45 @@
+name: Run Unit Tests
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    name: Build and Test default scheme using iPhone
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install pod dependencies
+        run: |
+          cd github-actions
+          pod install
+
+      - name: Set up Xcode 14.3.1
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '14.3.1'  # Устанавливаем нужную версию Xcode
+
+      - name: Run Unit Tests
+        run: |
+          cd github-actions
+          xcodebuild test \
+            -project github-actions.xcodeproj \
+            -scheme "github-actions" \
+            -destination 'platform=iOS Simulator,name=iPhone 14' \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            OTHER_SWIFT_FLAGS="-D ED_SKIP_SWIFT_FORMAT" | tee test.log | xcpretty
+
+      - name: Upload unit test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: TestLogs
+          path: test.log

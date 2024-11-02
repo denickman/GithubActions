@@ -1,5 +1,5 @@
 name: Deployment Execution
-on: push
+on: pull_request
 
 jobs:
   firstJob:
