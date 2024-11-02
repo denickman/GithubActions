@@ -42,4 +42,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
             name: SingleFileArtifact
-            path: github-actions/Info.plist  # Укажите путь к файлу
+            path: |
+                github-actions/Info.plist
+                github-actions/Helpers
