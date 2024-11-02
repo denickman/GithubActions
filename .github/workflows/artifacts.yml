@@ -40,9 +40,9 @@ jobs:
 
       - name: Run Unit Tests
         run: |
-          # cd github-actions
+          cd github-actions
           xcodebuild test \
-            -project github-actions.xcodeproj \
+            -project github-actions.xcworkspace \
             -scheme "github-actions" \
             -destination 'platform=iOS Simulator,name=iPhone 14' \
             CODE_SIGN_IDENTITY="" \
