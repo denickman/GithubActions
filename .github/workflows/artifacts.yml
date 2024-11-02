@@ -78,6 +78,7 @@ jobs:
       #       CODE_SIGNING_REQUIRED=NO \
       #       OTHER_SWIFT_FLAGS="-D ED_SKIP_SWIFT_FORMAT" | xcpretty
 
+
       - name: Upload specific file as artifact
         uses: actions/upload-artifact@v4
         with:
@@ -97,6 +98,8 @@ jobs:
           uses: actions/download-artifact@v4
           with:
             name: Artifacts
+
+        - name: Show Artifacts infor
           run: ls -la
 
         - name: Output filename
