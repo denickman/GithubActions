@@ -47,7 +47,7 @@ jobs:
             -destination 'platform=iOS Simulator,name=iPhone 14' \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
-            OTHER_SWIFT_FLAGS="-D ED_SKIP_SWIFT_FORMAT"
+            OTHER_SWIFT_FLAGS="-D ED_SKIP_SWIFT_FORMAT" | xcpretty
 
       - name: Upload specific file as artifact
         uses: actions/upload-artifact@v4
