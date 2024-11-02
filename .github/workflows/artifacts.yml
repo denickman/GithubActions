@@ -17,8 +17,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: List files for debugging
-        run: ls -R
+      - name: Show current directory
+        run: pwd
+
+      - name: List files in root directory
+        run: ls -la
+
+      - name: List files in github-actions directory
+        run: |
+          cd github-actions
+          ls -la
 
       - name: Install pod dependencies
         run: |
