@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
 #      - name: Install pod dependencies
 #        run: |
@@ -39,7 +39,7 @@ jobs:
 #            OTHER_SWIFT_FLAGS="-D ED_SKIP_SWIFT_FORMAT"
 
       - name: Upload specific file as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
             name: SingleFileArtifact
             path: github-actions/Info.plist  # Укажите путь к файлу
