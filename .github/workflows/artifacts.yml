@@ -20,16 +20,16 @@ jobs:
       - name: Show current directory
         run: pwd
 
-      - name: List BEFORE
-        run: ls -la
-
-      - name: Install pod dependencies
-        run: |
-          cd github-actions
-          pod install --verbose
-
-      - name: List AFTER
-        run: ls -la
+      # - name: List BEFORE
+      #   run: ls -la
+      #
+      # - name: Install pod dependencies
+      #   run: |
+      #     cd github-actions
+      #     pod install --verbose
+      #
+      # - name: List AFTER
+      #   run: ls -la
 
       # - name: Check if .xcodeproj exists
       #   run: |
@@ -52,27 +52,42 @@ jobs:
       #           exit 1
       #        fi
 
-      - name: Set up Xcode 14.3.1
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: '14.3.1'
-
-      - name: Run Unit Tests
-        run: |
-          #cd github-actions
-          ls -la
-          xcodebuild test \
-            -workspace github-actions.xcworkspace \
-            -scheme "github-actions" \
-            -destination 'platform=iOS Simulator,name=iPhone 14' \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
-            OTHER_SWIFT_FLAGS="-D ED_SKIP_SWIFT_FORMAT" | xcpretty
+      # - name: Set up Xcode 14.3.1
+      #   uses: maxim-lobanov/setup-xcode@v1
+      #   with:
+      #     xcode-version: '14.3.1'
+      #
+      # - name: Run Unit Tests
+      #   run: |
+      #     #cd github-actions
+      #     ls -la
+      #     xcodebuild test \
+      #       -workspace github-actions.xcworkspace \
+      #       -scheme "github-actions" \
+      #       -destination 'platform=iOS Simulator,name=iPhone 14' \
+      #       CODE_SIGN_IDENTITY="" \
+      #       CODE_SIGNING_REQUIRED=NO \
+      #       OTHER_SWIFT_FLAGS="-D ED_SKIP_SWIFT_FORMAT" | xcpretty
 
       - name: Upload specific file as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SingleFileArtifact
+          name: Artifacts
           path: |
             github-actions/Info.plist
             github-actions/Helpers
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+        - name: Deploy
+          run: echo "Deploying..."
+
+        - name: Download artifacts
+          uses: actions/download-artifact@v4
+          with:
+            name: Artifacts
+
+        - name: Output contents
+          run: ls -la
