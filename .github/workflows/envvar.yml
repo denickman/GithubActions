@@ -11,7 +11,7 @@ env:
     GIT_PASSWORD: Qwerty123
     GIT_JOB_PORT: 8080
     GIT_ACTION_SECRET: ${{ secrets.GIT_ACTION_SECRET }}
-    
+
     # also env ca be at job level and step level as well
 
 jobs:
@@ -22,29 +22,30 @@ jobs:
             MONGODB_CLUSTER_PASSWORD: qwerty123
         environment: testing # see the name of env that had been set in github repository settings
         # each environment has its own secrets
-            
+
         runs-on: macos-latest
         outputs:
             name-abc-file: ${{ steps.publishID.outputs.something }}
         steps:
         - name: Get cole
           uses: actions/checkout@v4
-          
+
         - name: Publish id
+
           id: publishID
-          run: find Resources/*.json -type f -execdir echo 'something={}' >> $GITHUB_OUTPUT ';'
+          run: |
+            cd github-actions
+            find Resources/*.json -type f -execdir echo 'something={}' >> $GITHUB_OUTPUT ';'
 
         - name: List resources
           run: |
             echo "Name using curly braces: "${{ env.GIT_DB_NAME }}"
             echo "Name using $ sign GIT_DB_NAME is $GIT_USERNAME"
-            
-            
+
+
     outputShowJob:
         runs-on: macos_latest
         needs: buildJob
         steps:
             - name: Print output from build job
               run: echo "Output from build job is ${{ needs.buildJob.outputs.name-abc-file }}"
-        
-
