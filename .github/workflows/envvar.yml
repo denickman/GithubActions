@@ -2,7 +2,7 @@ name: Env Vars
 on:
     push:
         branches:
-            - dev
+            - main
 concurrency:
   group: my-workflow-${{ github.ref }}
   cancel-in-progress: true
