@@ -10,7 +10,7 @@ jobs:
         steps:
         - name: Get code
           id: get-code-step
-          uses: actions/checkout@v4ss
+          uses: actions/checkout@v4
 
         - name: List resources
           if: failure() && steps.get-code-step.outcome == 'failure' #outome can be success, failure, cancelled, skipped
