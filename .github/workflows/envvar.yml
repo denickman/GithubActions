@@ -48,7 +48,7 @@ jobs:
             echo "Name using bucks sign is $GIT_USERNAME"
 
     outputShowJob:
-        runs-on: macos_latest
+        runs-on: macos-latest
         needs: buildJob
         steps:
             - name: Print output from build job
