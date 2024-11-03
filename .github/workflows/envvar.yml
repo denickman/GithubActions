@@ -2,7 +2,7 @@ name: Env Vars
 on:
     push:
         branches:
-            - main
+            - dev
 
 # workflow level env values
 env:
