@@ -4,6 +4,10 @@ on:
         branches:
             - dev
 
+concurrency:
+  group: my-workflow-${{ github.ref }}
+  cancel-in-progress: true
+
 # workflow level env values
 env:
     GIT_DB_NAME: GitActions Data Base
