@@ -39,7 +39,7 @@ jobs:
 
         - name: List resources
           run: |
-            echo "Name using curly braces: "${{ env.GIT_DB_NAME }}"
+            echo "Name using curly braces: ${{ env.GIT_DB_NAME }}"
             echo "Name using bucks sign is $GIT_USERNAME"
 
 
