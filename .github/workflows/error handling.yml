@@ -1,6 +1,6 @@
 name: Outputs
 on:
-    pull_request:
+    push:
         branches:
             - dev
 
