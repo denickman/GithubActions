@@ -19,7 +19,7 @@ jobs:
         env: # job level env
             GIT_BUILD_ENV_TITLE: abc
             MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
-            MONGODB_PASSWORD: ${{ secretes.MONGODB_PASSWORD }}
+            MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
         environment: testing # see the name of env that had been set in github repository settings
         # each environment has its own secrets
 
