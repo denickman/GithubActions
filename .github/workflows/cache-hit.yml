@@ -1,0 +1,40 @@
+
+
+
+name: Cache pod dependecies
+on:
+    push:
+        branches:
+            - dev
+jobs:
+    build:
+        runs-on: macos-latest
+        steps:
+        - name: Get code
+          uses: actions/checkout@v4
+
+        - name: Cache dependecies
+          id: cache
+          uses: actions/cache@v4
+          with:
+            path: |
+                Pods
+                Podfile.lock
+                key: ${{ runner.os }}-pod-${{ hashFiles('**/Podfile.lock') }}
+                
+        - name: Install pods
+          if: steps.cache.outputs.cache-hit != 'true' # pass this step is cache exist
+          run: |
+            cd github-actions
+            pod install
+            
+    checkCache:
+        runs-on: macos-latest
+        steps:
+            - name: Check existed cache
+              if: steps.cache.outputs.cache-hit != 'true'
+              run: echo "Cache Exist"
+    
+          
+
+    
