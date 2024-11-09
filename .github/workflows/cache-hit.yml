@@ -29,7 +29,7 @@ jobs:
             pod install
 
         - name: Check cache status
-          run: echo "Cache status: ${{ steps.cache.outputs.cache-hit }}"
+          run: echo "Cache status is ${{ steps.cache.outputs.cache-hit }}"
 
     checkCache:
         runs-on: macos-latest
