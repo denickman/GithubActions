@@ -9,6 +9,8 @@ on:
 jobs:
     build:
         runs-on: macos-latest
+        outputs:
+          cache-hit: ${{ steps.cache.outputs.cache-hit }}
         steps:
         - name: Get code
           uses: actions/checkout@v4
@@ -35,10 +37,6 @@ jobs:
         runs-on: macos-latest
         needs: build
         steps:
-
             - name: Check cache status
-              run: echo "Cache status is ${{ steps.cache.outputs.cache-hit }}"
-
-            - name: Check existed cache
-              if: steps.cache.outputs.cache-hit == 'true'
+              if: ${{ needs.build.outputs.cache-hit == 'true' }}
               run: echo "Cache Exist"
