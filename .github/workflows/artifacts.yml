@@ -1,14 +1,14 @@
-name: Run Unit Tests
+ name: Run Unit Tests
 
-on:
+ on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
-jobs:
+ jobs:
   build:
     name: Build and Test default scheme using iPhone
     runs-on: macos-latest
