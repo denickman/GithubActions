@@ -28,6 +28,9 @@ jobs:
             cd github-actions
             pod install
 
+        - name: Check cache status
+          run: echo "Cache status: ${{ steps.cache.outputs.cache-hit }}"
+
     checkCache:
         runs-on: macos-latest
         needs: build
