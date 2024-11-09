@@ -35,6 +35,10 @@ jobs:
         runs-on: macos-latest
         needs: build
         steps:
+
+            - name: Check cache status
+              run: echo "Cache status is ${{ steps.cache.outputs.cache-hit }}"
+
             - name: Check existed cache
               if: steps.cache.outputs.cache-hit == 'true'
               run: echo "Cache Exist"
