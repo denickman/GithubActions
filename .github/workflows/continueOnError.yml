@@ -1,0 +1,19 @@
+name: Cache pod dependecies
+on:
+    push:
+        branches:
+            - dev
+jobs:
+    firstJob:
+        runs-on: macos-latest
+        steps:
+            - name: Step 1
+              id: step1
+              run: exit 1
+              continue-on-error: true
+
+            - name: Check Outcome and Conclusion
+              run: |
+                     echo "Outcome of Step 1: ${{ steps.step1.outcome }}"
+                     echo "Conclusion of Step 1: ${{ steps.step1.conclusion }}"
+  

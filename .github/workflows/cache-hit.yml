@@ -5,7 +5,7 @@ name: Cache pod dependecies
 on:
     push:
         branches:
-            - dev
+            - main
 jobs:
     build:
         runs-on: macos-latest
