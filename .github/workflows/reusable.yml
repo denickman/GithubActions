@@ -1,0 +1,43 @@
+name: Reusable workflow
+# workflow_call allows to call this workflow from another workflows
+
+on:
+    workflow_call:
+        inputs: #reserved word
+            artifa-name:
+                description: the name of deployable file
+                required: false # required: Если установлено true, то workflow не может быть вызван без указания значения для этого параметра.
+                # Это сделано, чтобы требовать от вызывающего workflow предоставить artifact-name
+                default: dist # if required true,
+                # this default is not need since required = true, so if this workflow did not receive input, it will never be executed
+                type: string
+
+        outputs:
+            result:
+                description: The result of deployment
+                value: ${{ jobs.deploy.outputs.outcome }}
+
+jobs:
+    deploy:
+        outputs:
+            outcome: ${{ steps.set-result.outputs.step-resulttt }}
+
+        runs-on: macos-latest
+        steps:
+        - name: Echo...
+          run: echo ${{ inputs.artifa-name }}
+
+        - name: Get Code
+          uses: actions/download-artifact@v3
+          with:
+            name: ${{ inputs.artifa-name }}
+
+        - name: List files
+          run: ls
+
+        - name: Output info
+          run: echo "Deploying and uploading (step 2)"
+
+        - name: Set result output
+          id: set-result
+          run: echo "step-resulttt=success" >> $GITHUB_OUTPUT

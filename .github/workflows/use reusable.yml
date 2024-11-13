@@ -1,0 +1,35 @@
+name: Using reusable workflow
+
+on:
+    push:
+        branches:
+         - dev
+
+jobs:
+    start:
+        runs-on: macos-latest
+        steps:
+        - name: Checkout code
+          uses: actions/checkout@v2
+
+        - name: List directory contents
+          run: ls
+
+        - name: Archive artifact
+          uses: actions/upload-artifact@v2
+          with:
+            name: ios-info-files
+            path: ./github-actions/github-actions/Resources/configuration.json
+
+    deploy:
+        needs: start
+        uses: ./.github/workflows/reusable.yml
+        with:
+            artifa-name: ios-info-files
+
+    print-deploy-result:
+        needs: deploy
+        runs-on: macos-latest
+        steps:
+        - name: Print deploy output LAST
+          run: echo "${{ needs.deploy.outputs.result }}"
