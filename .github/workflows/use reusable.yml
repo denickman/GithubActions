@@ -19,11 +19,11 @@ jobs:
           uses: actions/upload-artifact@v3
           with:
             name: ios-info-files
-            path: ./github-actions/github-actions/Resources/configuration.json
+            path: ./github-actions/Resources/configuration.json
 
         - name: Check if artifact exists
           run: |
-                if [ ! -f ./github-actions/github-actions/Resources/configuration.json ]; then
+                if [ ! -f ./github-actions/Resources/configuration.json ]; then
                   echo "Artifact not found!"
                   exit 1
                 fi
