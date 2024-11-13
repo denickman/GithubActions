@@ -3,10 +3,11 @@ name: Reusable workflow
 
 on:
     workflow_call:
+        workflows: [use reusable]
         inputs: #reserved word
             artifa-name:
                 description: the name of deployable file
-                required: false # required: Если установлено true, то workflow не может быть вызван без указания значения для этого параметра.
+                required: true # required: Если установлено true, то workflow не может быть вызван без указания значения для этого параметра.
                 # Это сделано, чтобы требовать от вызывающего workflow предоставить artifact-name
                 default: dist # if required true,
                 # this default is not need since required = true, so if this workflow did not receive input, it will never be executed
