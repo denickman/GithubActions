@@ -3,9 +3,9 @@ name: Reusable workflow
 
 on:
     workflow_call:
-      
+
         inputs: #reserved word
-            artifa-name:
+            artifact-name:
                 description: the name of deployable file
                 required: true # required: Если установлено true, то workflow не может быть вызван без указания значения для этого параметра.
                 # Это сделано, чтобы требовать от вызывающего workflow предоставить artifact-name
@@ -26,12 +26,12 @@ jobs:
         runs-on: macos-latest
         steps:
         - name: Echo...
-          run: echo ${{ inputs.artifa-name }}
+          run: echo ${{ inputs.artifact-name }}
 
         - name: Get Code
           uses: actions/download-artifact@v3
           with:
-            name: ${{ inputs.artifa-name }}
+            name: ${{ inputs.artifact-name }}
 
         - name: List files
           run: ls
