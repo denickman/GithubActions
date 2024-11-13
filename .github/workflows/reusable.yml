@@ -13,15 +13,19 @@ on:
                 # this default is not need since required = true, so if this workflow did not receive input, it will never be executed
                 type: string
 
+        # secrets:
+        #   some-secret:
+        #     required: true
+
         outputs:
-            result:
+            resultee:
                 description: The result of deployment
-                value: ${{ jobs.deploy.outputs.outcome }}
+                value: ${{ jobs.deploy.outputs.outcomeHere }}
 
 jobs:
     deploy:
         outputs:
-            outcome: ${{ steps.set-result.outputs.step-resulttt }}
+            outcomeHere: ${{ steps.set-result.outputs.step-resulttt }}
 
         runs-on: macos-latest
         steps:
