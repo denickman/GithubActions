@@ -25,7 +25,7 @@ jobs:
         needs: start
         uses: ./.github/workflows/reusable.yml
         with:
-            artifa-name: ios-info-files
+            artifact-name: ios-info-files
 
     print-deploy-result:
         needs: deploy
