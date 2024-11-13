@@ -3,7 +3,7 @@ name: Reusable workflow
 
 on:
     workflow_call:
-        workflows: [use reusable]
+      
         inputs: #reserved word
             artifa-name:
                 description: the name of deployable file
