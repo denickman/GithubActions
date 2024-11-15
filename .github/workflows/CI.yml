@@ -21,7 +21,7 @@ jobs:
 
       # Теперь используем локальное действие
       - name: Load & Cache dependencies
-        uses: ././.github/actions/cached-deps/action.yml
+        uses: ./.github/actions/cached-deps/action.yml
         continue-on-error: true
 
       - name: Load & Cache dependencies
