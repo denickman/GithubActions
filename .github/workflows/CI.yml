@@ -25,9 +25,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Show list
-        run: | 
-            ls -la
-            cd github-actions
+        run: |
+            cd .github
             ls -la
 
       - name: Load & Cache dependecies
