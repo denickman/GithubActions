@@ -1,28 +1,25 @@
 name: CI
 
-# Controls when the action will run.
-# Triggers the workflow on specific pull request events.
 on:
   push:
     branches:
       - dev
-     # - feature/image-feed/cache-feed-use-case
 
 jobs:
-  # This workflow contains a single job called "build-and-test"
   build-and-test:
-    # The type of runner that the job will run on
     runs-on: macos-14
-
     timeout-minutes: 5
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Get code
+      # Проверяем, что репозиторий действительно был получен
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Теперь можно использовать локальное действие, так как код репозитория доступен
+      # Проверка наличия файла перед использованием локального действия
+      - name: List files in .github/actions/cached-deps
+        run: ls -la .github/actions/cached-deps/
+
+      # Теперь используем локальное действие
       - name: Load & Cache dependencies
         uses: ./.github/actions/cached-deps/action.yml
 
@@ -30,4 +27,4 @@ jobs:
         run: sudo xcode-select -switch /Applications/Xcode_16.0.app
 
       - name: Build and Test
-        run: xcodebuild test -project github-actions.xcodeproj -scheme "github-actions" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO #SWIFT_TREAT_WARNINGS_AS_ERRORS=YES OTHER_SWIFT_FLAGS="-D ED_SKIP_SWIFT_FORMAT"
+        run: xcodebuild test -project github-actions.xcodeproj -scheme "github-actions" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
