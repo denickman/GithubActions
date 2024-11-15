@@ -23,6 +23,18 @@ jobs:
       - name: Load & Cache dependencies
         uses: ././.github/actions/cached-deps/action.yml
 
+      - name: Load & Cache dependencies
+        uses: actions/github-script@v6
+          with:
+              script: |
+                  const fs = require('fs');
+                    const actionPath = './.github/actions/cached-deps/action.yml';
+                      if (fs.existsSync(actionPath)) {
+                        console.log('Action file exists!');
+                          } else {
+                            throw new Error('Action file not found');
+                          }
+
       - name: Select Xcode
         run: sudo xcode-select -switch /Applications/Xcode_16.0.app
 
