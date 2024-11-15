@@ -24,7 +24,7 @@ jobs:
       - name: Get code
         uses: actions/checkout@v4
 
-        name: Show list
+      - name: Show list
         run: ls -la
 
       - name: Load & Cache dependecies
