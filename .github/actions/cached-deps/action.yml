@@ -1,5 +1,8 @@
-name: 'Get & Cache Dependecies' # title of action in github actions store
-description: 'Get the dependencies (via podfile) and cache them' # description of action in github actions store
+
+# https://docs.github.com/en/actions/sharing-automations/creating-actions/metadata-syntax-for-github-actions
+
+name: 'Get & Cache Dependecies' # required line - title of action in github actions store
+description: 'Get the dependencies (via podfile) and cache them' # required line - description of action in github actions store
 
 inputs: # for make custom action more generic
     cachinggg:
@@ -14,9 +17,9 @@ outputs:
         description: 'Whether the cache was used'
         value: ${{ steps.installDpID.outputs.cachexxx }} # assing a value here
 
-runs:
-    using: 'composite' # this tells github that this is a custom composite action
-    steps:
+runs: # required line
+    using: 'composite' # required line - this tells github that this is a custom composite action 
+    steps: # required
         - name: Cache dependencies
           if: inputs.cachinggg == 'true' # check default value (true)
           id: cacheID
@@ -30,9 +33,8 @@ runs:
         - name: Install pod dependencies
           id: installDepID
           if: steps.cache.outputs.cache-hit != 'true' || inputs.cachinggg != 'true'
-          run: |
+          run: | # if you are using run: key - you should add shell: key as well
                 cd github-actions
                 pod install
                 echo "cachexxx=${{ inputs.cachinggg }}" >> $GITHUB_OUTPUT
           shell: bash # bash - which shell environment should be used for this action
-

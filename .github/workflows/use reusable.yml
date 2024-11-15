@@ -3,7 +3,7 @@ name: Using reusable workflow
 on:
     push:
         branches:
-         - dev
+         - main
 
 jobs:
     start:
