@@ -6,7 +6,7 @@ description: 'Get the dependencies (via podfile) and cache them' # required line
 
 inputs: # for make custom action more generic
     cachinggg:
-        description: 'Whether to cache dependecies or not' # must be added
+        description: 'Whether to cache dependecies or not' # must be added, required
         required: false # whether this input is needed or not, user must provided this value or not
         # true - user must provide a value in the workflow using this action
         # false - valus is not actually needed, optional
@@ -15,10 +15,10 @@ inputs: # for make custom action more generic
 outputs:
     used-cachexxx:
         description: 'Whether the cache was used'
-        value: ${{ steps.installDpID.outputs.cachexxx }} # assing a value here
+        value: ${{ steps.installDepID.outputs.cachexxx }} # assing a value here
 
 runs: # required line
-    using: 'composite' # required line - this tells github that this is a custom composite action 
+    using: 'composite' # required line - this tells github that this is a custom composite action
     steps: # required
         - name: Cache dependencies
           if: inputs.cachinggg == 'true' # check default value (true)

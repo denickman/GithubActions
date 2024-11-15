@@ -24,8 +24,14 @@ jobs:
 
       # Теперь используем локальное действие
       - name: Load & Cache dependencies
+        id: cache-deps
         uses: ./.github/actions/cached-deps
+        with:
+          cachinggg: 'false'
         continue-on-error: true
+
+     - name: Output information
+       run: echo "Cache used? ${{ steps.cache-deps.outputs.used-cachexxx }}" # used-cachexxx - see action.yml file
 
       - name: Load & Cache dependencies
         uses: actions/github-script@v6
