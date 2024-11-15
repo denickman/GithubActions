@@ -25,7 +25,7 @@ jobs:
 
       - name: Load & Cache dependencies
         uses: actions/github-script@v6
-          with:
+        with:
               script: |
                   const fs = require('fs');
                     const actionPath = './.github/actions/cached-deps/action.yml';
