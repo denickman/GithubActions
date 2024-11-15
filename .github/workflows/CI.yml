@@ -30,7 +30,8 @@ jobs:
             ls -la
 
       - name: Load & Cache dependecies
-        uses: ./.github/actions/cached-deps/action.yml
+        run: ls -la
+        # uses: ./.github/actions/cached-deps/action.yml
 
       - name: Select Xcode
         run: sudo xcode-select -switch /Applications/Xcode_16.0.app
