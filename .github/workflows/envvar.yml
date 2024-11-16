@@ -5,7 +5,7 @@ on:
             - main
 concurrency:
   group: my-workflow-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 # workflow level env values
 env:
