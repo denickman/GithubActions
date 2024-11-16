@@ -1,21 +1,23 @@
 name: Label Issues (Script Injection Example)
 on:
- issues:
-   types:
-     - opened
+  issues:
+    types:
+      - opened
 
 jobs:
- assign_label:
-   runs-on: macos-latest
-   steps:
-     - name: Assing Label
-       run: |
-        issue_title="${{ github.event.issue.title }}"
-        if [[ "$issue_title" == *"bug"* ]]; then
-        echo "Issue is about a bug!"
-        else
-        echo "Issue is not about a bug"
-        fi
+  assign_label:
+    runs-on: macos-latest
+    steps:
+      - name: Assign Label
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        run: |
+          if [[ "$ISSUE_TITLE" == *"bug"* ]]; then
+            echo "Issue is about a bug!"
+          else
+            echo "Issue is not about a bug"
+          fi
+
        # - name: Assing Label
        #   env:
        #     TITLE: ${{ github.event.issue.title }}
