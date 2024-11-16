@@ -30,8 +30,8 @@ jobs:
           cachinggg: 'false'
         continue-on-error: true
 
-     - name: Output information
-       run: echo "Cache used? ${{ steps.cache-deps.outputs.used-cachexxx }}" # used-cachexxx - see action.yml file
+      - name: Output information
+        run: echo "Cache used? ${{ steps.cache-deps.outputs.used-cachexxx }}" # used-cachexxx - see action.yml file
 
       - name: Load & Cache dependencies
         uses: actions/github-script@v6
