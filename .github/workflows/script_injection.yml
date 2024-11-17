@@ -1,10 +1,10 @@
 name: Label Issues (Script Injection Example)
 on:
-  # issues:
-  #   types:
-  #     - opened
-  #     - labeled
-  push
+  issues:
+    types:
+      - opened
+      - labeled
+  #push
 
 jobs:
   assign_label:
